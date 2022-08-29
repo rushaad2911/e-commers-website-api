@@ -31,7 +31,7 @@ class ProductCreateApiView(generics.CreateAPIView):
     
     def perform_create(self, serializer):                
         # used to add extra data when creating a new object in the database --will not execute if u override create
-        serializer.save(seller=self.request.user)
+        serializer.save(seller_id=self.request.user)
         
     
     def post (self,*args,**kwargs):
@@ -52,4 +52,4 @@ class ProductDeleteApiView(generics.DestroyAPIView):
     
     def perform_create(self, serializer):                
         # used to add extra data when creating a new object in the database --will not execute if u override create
-        serializer.save(seller=self.request.user)
+        serializer.save(seller_id=self.request.user)

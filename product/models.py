@@ -15,7 +15,7 @@ class Gerens(models.Model):
 class Product(models.Model):
    
     
-    seller = models.ForeignKey(UserAccount, on_delete=models.CASCADE,blank=True, null=True)
+    seller_id = models.ForeignKey(UserAccount, on_delete=models.CASCADE,blank=True, null=True)
     product_id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     product_geren = models.ManyToManyField(Gerens,blank=True)
     product_title = models.CharField(max_length=300)
