@@ -35,8 +35,7 @@ class Product(models.Model):
         return super().delete(*args,**kwargs)
     
  
-    
-    
+ 
 
 class address(models.Model):
     
