@@ -3,7 +3,7 @@ product_images
 site.session.sql
 
 .vscode
-
+__pycache__/
 *.log
 *.pot
 *.pyc
