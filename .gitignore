@@ -1,5 +1,12 @@
-product_images/*
+product_images
 
 site.session.sql
 
 .vscode
+
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
