@@ -21,7 +21,7 @@ class Product(models.Model):
     product_title = models.CharField(max_length=300)
     product_price = models.IntegerField() 
     product_images = models.ImageField(upload_to='product_images/')
-    product_description = models.TextField(blank=True,null=True)
+    product_description = models.TextField()
     product_features_spesification = models.TextField(null = True,blank = True)
     
     
