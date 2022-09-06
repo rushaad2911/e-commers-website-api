@@ -1,6 +1,10 @@
+*.log
+*.pot
+*.pyc
+__pycache__
+db.sqlite3
+media
+
+
 product_images
 
-site.session.sql
-
-.vscode
-git 
