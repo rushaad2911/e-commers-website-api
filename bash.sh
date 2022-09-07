@@ -1,9 +1,18 @@
 #! /usr/bin/bash
 
 user=$(whoami)
-v=$(v/scripts/activate)
+
+echo "Hi"
+
+
+read hi
+echo hi
+
 hi=$1
 echo "$1"
-echo "Hi"
+
+sleep 1
 echo "Bash terminal activated "
-echo "welcome back $user"
+
+sleep 2
+echo "welcome back $USER"
