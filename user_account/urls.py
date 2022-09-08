@@ -1,10 +1,11 @@
 from django.urls import path,include
-from .views import CreateUser,CreateSeller
+from .views import CreateUser,CreateSeller,CreateBuyer
 
 urlpatterns = [
     
-    path('create/',CreateUser.as_view(),name='user'),
+    path('create/',CreateUser.as_view(),name='createuser'),
     path('',include('allauth.urls')),
-    path('seller/',CreateSeller.as_view(),name='seller')
+    path('seller/',CreateSeller.as_view(),name='createseller'),
+    path('buyer/',CreateBuyer.as_view(),name='createbuyer'),
     
 ]

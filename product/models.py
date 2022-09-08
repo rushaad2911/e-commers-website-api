@@ -1,6 +1,6 @@
 from django.db import models
 import uuid 
-from user_account.models import UserAccount
+from user_account.models import SellerAccount,UserAccount
 
 
 class Gerens(models.Model):
@@ -43,6 +43,6 @@ class address(models.Model):
     state = models.CharField(max_length=200)
     country = models.CharField(max_length=200)
     pincode = models.IntegerField()
-    user_adress = models.ForeignKey(UserAccount, on_delete=models.CASCADE)
+    user_adress = models.ForeignKey(SellerAccount, on_delete=models.CASCADE)
     street_1 = models.CharField(max_length=100)
     street_2 = models.CharField(max_length=100)

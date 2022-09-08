@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import UserAccount,SellerAccount
+from .models import BuyerAccount, UserAccount,SellerAccount
 from django import forms
 
 
@@ -14,8 +14,15 @@ class UserCreateSerializers(serializers.ModelSerializer):
 
 class SellerCreateSerializer(serializers.ModelSerializer):
     
-    password = forms.CharField(widget=forms.PasswordInput())
+  
     class Meta():
         
         model = SellerAccount
-        fields  =['username','password','email','shop_name']
+        fields = ['username','password','email','shop_name']
+        
+        
+class BuyerCreateSerializer(serializers.ModelSerializer):
+    class Meta():
+        
+        model = BuyerAccount
+        fields = ['username','password','email']
