@@ -1,3 +1,11 @@
 from django.test import TestCase
 
-# Create your tests here.
+class HoamePageTest(TestCase):
+    
+    def test_home_page(self):
+        
+        res = self.client.get('/')
+        self.assertEqual(res.status_code,200)
+        
+    
+    
