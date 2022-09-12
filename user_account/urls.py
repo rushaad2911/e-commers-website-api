@@ -1,11 +1,12 @@
+from calendar import c
 from django.urls import path,include
-from .views import CreateUser,CreateSeller,CreateBuyer
+from .views import CreateSeller,CreateUserAccoun
 
 urlpatterns = [
     
-    path('create/',CreateUser.as_view(),name='createuser'),
-    path('',include('allauth.urls')),
-    path('seller/',CreateSeller.as_view(),name='createseller'),
-    path('buyer/',CreateBuyer.as_view(),name='createbuyer'),
+   
+    path('',include('dj_rest_auth.urls')),
+    path('signup/',include('dj_rest_auth.registration.urls')),
+    path('<uuid:pk>/',CreateSeller.as_view(),name='createseller'),
     
 ]
