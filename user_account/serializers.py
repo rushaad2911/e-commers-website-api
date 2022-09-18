@@ -1,28 +1,28 @@
+from urllib import request
 from rest_framework import serializers
-from .models import BuyerAccount, UserAccount,SellerAccount
-from django import forms
+from .models import  UserAccount
+from dj_rest_auth.registration.serializers import RegisterSerializer
+from django.db import transaction
 
 
-class UserCreateSerializers(serializers.ModelSerializer):
+        
+class UserAccountCreateSerializer(RegisterSerializer):
     
-    class Meta():
-        
-        model = UserAccount
-        fields = ['username','password','email']
-        
-        
-
-class SellerCreateSerializer(serializers.ModelSerializer):
     
-  
-    class Meta():
+    seller_account = serializers.BooleanField(default=False)
         
-        model = SellerAccount
-        fields = ['username','password','email','shop_name']
+    # model = UserAccount
+    # fields = ['username','password','seller_account']
+    
+    
+    @transaction.atomic      
+    def save(self,request):
         
-        
-class BuyerCreateSerializer(serializers.ModelSerializer):
-    class Meta():
-        
-        model = BuyerAccount
-        fields = ['username','password','email']
+        user = super().save(request)
+        # user.username=self.data.get('username')
+        user.seller_account=self.data.get('seller_account')
+        # user.password=self.data.get('password')
+        user.save()
+        return user
+           
+           
