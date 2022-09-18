@@ -1,32 +1,26 @@
-from tkinter import S
 from django.shortcuts import render
 from .models import Product
 from .serializer import CreateProductSerializer,EditProductSerializer
 from rest_framework import generics
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponseForbidden,HttpResponse
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin,PermissionRequiredMixin
 
-# from seller_account.models import SellerAccount
+from django.contrib.auth.models import Permission
+from .permissions import ProductCreatPermission
 
 
-
-class ProductCreateApiView(generics.CreateAPIView):
+class ProductCreateApiView(LoginRequiredMixin,
+                        #    PermissionRequiredMixin,
+                           generics.CreateAPIView):
     
     
-    # def get(self,*args,**kwargs):
-        
-    #     if isinstance(self.request.user,SellerAccount):
-           
-    #         return HttpResponseRedirect(reverse_lazy('homepageapi'))
-            
-    #     else:
-    #         return HttpResponseRedirect(reverse_lazy('createselleraccount'))
-            
 
         
     queryset = Product.objects.all()
     serializer_class = CreateProductSerializer
-    # permission_classes = []       create a custom permission class
+    login_url = 'rest_login'
+    # permission_required = [ProductCreatPermission]
     
     
     def perform_create(self, serializer):                
@@ -35,18 +29,22 @@ class ProductCreateApiView(generics.CreateAPIView):
         
     
     def post (self,*args,**kwargs):
+        
+        self.seller_id=self.request.user
         super().post(*args,**kwargs)
         return HttpResponseRedirect(reverse_lazy('homepageapi'))
     
     
+        
+    
     
         
         
-class ProductDeleteApiView(generics.DestroyAPIView):
+class ProductDeleteApiView(LoginRequiredMixin,UserPassesTestMixin,generics.DestroyAPIView):
     
     queryset = Product.objects.all()
     serializer_class = CreateProductSerializer
-    # lookup_field = 'product_id'
+    login_url = 'rest_login'
     # permission_classes = []
     
     
@@ -55,11 +53,20 @@ class ProductDeleteApiView(generics.DestroyAPIView):
         serializer.save(seller_id=self.request.user)
         
         
+    def test_func(self):
         
+        obj = self.get_object()
+        return obj.seller_id == self.request.user
+    
+    
         
-        
-        
-class ProductEditApiView(generics.RetrieveUpdateAPIView):
+class ProductEditApiView(LoginRequiredMixin,UserPassesTestMixin,generics.RetrieveUpdateAPIView):
     
     queryset = Product
     serializer_class = EditProductSerializer
+    login_url = 'rest_login'
+    
+    def test_func(self):
+        
+        obj = self.get_object()
+        return obj.seller_id == self.request.user

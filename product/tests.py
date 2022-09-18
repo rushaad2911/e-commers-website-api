@@ -42,4 +42,5 @@ class CreateProductTest(TestCase):
         
         self.assertEqual(self.user.username,'test_seller')
         self.assertEqual(res.status_code,200)
+        self.assertNotEqual(res.status_code,403)
 
