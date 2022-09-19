@@ -2,7 +2,6 @@ from re import U
 from django.shortcuts import render
 from rest_framework import generics,permissions
 from .models import UserAccount
-from .serializers import UserAccountCreateSerializer
 from django.http import HttpResponseRedirect 
 from django.urls import reverse_lazy
 from django.contrib.auth.hashers import make_password
