@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     
     "django.contrib.admin",
     "django.contrib.auth",
+    "django.contrib.sites",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
@@ -35,6 +36,10 @@ INSTALLED_APPS = [
     
     'rest_framework',
     'rest_framework.authtoken',
+    
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    
     'django_cleanup.apps.CleanupConfig',
     'allauth',
     'allauth.account',
@@ -152,3 +157,8 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 AUTH_USER_MODEL = 'user_account.UserAccount'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+
+SITE_ID = 1
